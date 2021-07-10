@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Newsletter.Models.Clientes>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Registro de Clientes para Newsletter</h1>
+<div class="text-center mb-3 ">
+    <form class="form-group center" asp-action="Index">
+        <br />
+        <p>
+            Busque por nome ou endereço de email:
+            <br>
+            <input class="form-control my-2" type="text" name="SearchString" />
+            <input class="form-control btn-success" type="submit" value="Buscar" />
+        </p>
+    </form>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataCadastro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataRevogação)
+            </th>
+            <th>
+                <a class="btn btn-outline-success" asp-action="AdicionarOuEditar"><i class="far fa-plus-square m-1"></i> Novo Cliente</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ativo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dataCadastro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dataRevogação)
+                </td>
+                <td class="text-center">
+                    <a asp-action="AdicionarOuEditar" asp-route-id="@item.id"><i class="fa fa-marker fa-lg"></i></a>
+                    <a type="button" id="btnclick" class="text-danger ml-1" asp-action="Delete"
+                            asp-route-id="@item.id"
+                            onclick="return confirm('Você tem certeza que quer apagar esse registro')">
+                        <i class="fa fa-trash-alt"></i>
+                    </a>     
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

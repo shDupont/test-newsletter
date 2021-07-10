@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Newsletter.Models.Clientes
+
+
+<style>
+    .newsletter-subscribe {
+        color: #313437;
+        background-color: #fff;
+        padding: 50px 0;
+    }
+
+        .newsletter-subscribe p {
+            color: #7d8285;
+            line-height: 1.5;
+        }
+
+        .newsletter-subscribe h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            padding-top: 0;
+            margin-top: 0;
+            color: inherit;
+        }
+
+        .newsletter-subscribe .intro {
+            font-size: 16px;
+            max-width: 500px;
+            margin: 0 auto 25px;
+        }
+
+            .newsletter-subscribe .intro p {
+                margin-bottom: 35px;
+            }
+
+        .newsletter-subscribe form {
+            justify-content: center;
+        }
+
+            .newsletter-subscribe form .form-control {
+                background: #eff1f4;
+                border: none;
+                border-radius: 3px;
+                box-shadow: none;
+                outline: none;
+                color: inherit;
+                text-indent: 9px;
+                height: 45px;
+                margin-right: 10px;
+                min-width: 250px;
+            }
+
+            .newsletter-subscribe form .btn {
+                padding: 16px 32px;
+                border: none;
+                background: none;
+                box-shadow: none;
+                text-shadow: none;
+                opacity: 0.9;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 13px;
+                letter-spacing: 0.4px;
+                line-height: 1;
+            }
+
+                .newsletter-subscribe form .btn:hover {
+                    opacity: 1;
+                }
+
+                .newsletter-subscribe form .btn:active {
+                    transform: translateY(1px);
+                }
+
+            .newsletter-subscribe form .btn-primary {
+                background-color: #055ada !important;
+                color: #fff;
+                outline: none !important;
+            }
+</style>
+
+
+    <div class="newsletter-subscribe">
+        <div class="container">
+
+            <div class="intro">
+                <h2 class="text-center">Inscreva-se para a nossa Newsletter</h2>
+                <p class="text-center">Você reberá notícias e promoções sobre nossos produtos toda semana</p>
+            </div>
+
+            <form class="" asp-action="Index">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="id" />
+
+                <input type="hidden" value="True" asp-for="ativo" />
+                <span asp-validation-for="ativo" class="text-danger"></span>
+
+                <input type="hidden" value="@DateTime.Now.ToString()" asp-for="dataCadastro" />
+                <span asp-validation-for="dataCadastro" class="text-danger"></span>
+
+                <input type="hidden" value="" asp-for="dataRevogação" />
+
+                <span asp-validation-for="dataRevogação" class="text-danger"></span>
+
+                <div class="form-group ">
+                    <input class="form-control" type="text" name="nomeCompleto" placeholder="Seu Nome" asp-for="nomeCompleto">
+
+                    <span asp-validation-for="nomeCompleto" class="text-danger "></span>
+                </div>
+                
+                <div class="form-group ">
+                    <input class="form-control" type="email" name="email" placeholder="Seu endereço de email" asp-for="email">
+                    
+                    <span asp-validation-for="email" class="text-danger "></span>
+                </div>
+                
+
+                <div class="form-group  text-center">
+                    <button class="btn btn-primary" value="Enviar" asp-action="Criar" onclick="return confirm('Você tem certeza que quer se cadastrar?')" type="submit">Inscrever-se </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

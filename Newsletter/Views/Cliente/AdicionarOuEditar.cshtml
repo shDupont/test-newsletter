@@ -1,0 +1,59 @@
+﻿@model Newsletter.Models.Clientes;
+
+    @{
+        ViewData["Title"] = "Create";
+    }
+
+    <h1>Criar ou Editar</h1>
+
+    <h4>Formulário do Cliente</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="AdicionarOuEditar">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="id" />
+                <div class="form-group">
+                    <label asp-for="nomeCompleto" class="control-label"></label>
+                    <input asp-for="nomeCompleto" class="form-control" />
+                    <span asp-validation-for="nomeCompleto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="email" class="control-label"></label>
+                    <input asp-for="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="ativo" /> @Html.DisplayNameFor(model => model.ativo)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="dataCadastro" class="control-label"></label>
+                    <input asp-for="dataCadastro" class="form-control" />
+                    <span asp-validation-for="dataCadastro" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="dataRevogação" class="control-label"></label>
+                    <input asp-for="dataRevogação" class="form-control" />
+                    <span asp-validation-for="dataRevogação" class="text-danger"></span>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" value="Enviar" class="btn btn-success btn-block" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <a asp-action="Index" class="btn btn-primary btn-block"><i class="fa fatable"></i>Back to List</a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
